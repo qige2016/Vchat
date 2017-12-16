@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vchart</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="scripts/Vchat.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="banner">
+            <span id="status"></span>
+        </div>
+        <div id="historyMsg">
+        </div>
+        <div class="controls" >
+            <div class="items">
+                <input type="color" name="colorStyle" id="colorStyle">
+                <span class="glyphicon glyphicon-certificate" id="emoji"></span>
+                <label for="sendImage" class="imageLable">
+                    <span class="glyphicon glyphicon-picture" id="image"></span>
+                    <input id="sendImage" type="file" value="image"/>
+                </label>
+                <span class="glyphicon glyphicon-trash" id="clearBtn"></span>
+            </div>
+            <textarea id="messageInput"></textarea>
+            <div id="emojiWrapper">
+            </div>
+        </div>
+    </div>
+    <div id="loginWrapper">
+        <p id="info">连接中...</p>
+        <div id="nickWrapper">
+            <input type="text" placeHolder="昵称" id="nicknameInput" />
+            <input type="button" value="确定" id="loginBtn" />
+        </div>
+    </div>
+</body>
+</html>
