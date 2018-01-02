@@ -39,6 +39,10 @@ io.sockets.on('connection', function(socket) {
         //通过一个newImg事件分发到除自己外的每个用户
         socket.broadcast.emit('newImg', socket.nickname, imgData, color);
     });
+    //接收弹幕则广播其他人
+    socket.on('danmu', function(msg, color) {
+        socket.broadcast.emit('newDanmu', socket.nickname, msg, color);
+    });
 });
 
 

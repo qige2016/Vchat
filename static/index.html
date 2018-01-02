@@ -9,39 +9,76 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="pannel">
+        <div class="list" id="userUl">  
+            <span id="status"></span>
+            <ul id="userList">     
+            </ul> 
+        </div>
+        <div class="list" id="needUserList">
+            <span><i class="glyphicon glyphicon-chevron-left" id="tag"></i></span>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div id="musicBox">
+            <div class="playerWrapper">
+                <div class="musicProgress">
+
+                </div>
+                <div id="musicControl">
+
+                </div>
+                <!-- <div class="volume">
+                    <input type="range" step="1" id="volume" min="0" max="100" value="25" onchange="box.changeVolume(this.value)" oninput="box.changeVolume(this.value)">
+                </div> -->
+                <div id="np">
+                    <!-- <span id="np-mode">正在播放:</span>
+                    <span id="np-text" class="select-text"></span> -->
+                </div>
+            </div>
+        </div>
+        <div id="historyMsg">  
+        </div> 
+        <div class="controls" >
+            <div class="messageBox">
+                <div class="clearfix">
+                    <ul class="items">
+                        <li id="danmu">
+                            <input type="checkbox" name="checkbox1" id="checkbox1">是否使用弹幕
+                        </li>
+                        <li id="color"><input type="color" name="colorStyle" id="colorStyle" value="#ffffff"></li>
+                        <li id="emoji"><i class="glyphicon glyphicon-certificate"></i></li>
+                        <li id="image">
+                            <i class="glyphicon glyphicon-picture"></i>
+                            <input id="sendImage" type="file" value="image"/>
+                        </li>
+                        <li id="clearBtn"><i class="glyphicon glyphicon-trash"></i></li>
+                    </ul>
+                  
+                </div>
+                <textarea id="messageInput" placeholder="按下enter发送"></textarea>
+            </div>
+        
+        </div>  
+        <div id="emojiWrapper">
+        </div> 
+    </div>
+    <div id="loginWrapper">
+        <div id="nickWrapper"> 
+            <label id="info"></label>  
+            <input type="text" id="nicknameInput" />   
+        </div>
+        <input type="submit" value="确定" id="loginBtn" />
+    </div>
+    <div id="danmuWrapper">
+        <div id="showDanmu">
+        </div>
+    </div> 
     <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="scripts/Vchat.js"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <div class="banner">
-            <span id="status"></span>
-        </div>
-        <div id="historyMsg">
-        </div>
-        <div class="controls" >
-            <div class="items">
-                <input type="color" name="colorStyle" id="colorStyle">
-                <span class="glyphicon glyphicon-certificate" id="emoji"></span>
-                <label for="sendImage" class="imageLable">
-                    <span class="glyphicon glyphicon-picture" id="image"></span>
-                    <input id="sendImage" type="file" value="image"/>
-                </label>
-                <span class="glyphicon glyphicon-trash" id="clearBtn"></span>
-            </div>
-            <textarea id="messageInput" placeholder="enter发送"></textarea>
-            <div id="emojiWrapper">
-            </div>
-        </div>
-    </div>
-    <div id="loginWrapper">
-        <p id="info">连接中...</p>
-        <div id="nickWrapper">
-            <input type="text" placeHolder="昵称" id="nicknameInput" />
-            <input type="button" value="确定" id="loginBtn" />
-        </div>
-    </div>
+    <script src="scripts/jquery-Vchat.js"></script>
 </body>
 </html>
