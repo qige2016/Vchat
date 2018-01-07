@@ -1,13 +1,16 @@
 body {
-	background:-moz-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));/*Mozilla*/
+    background:-moz-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));/*Mozilla*/
     background:-webkit-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));/*new gradient for Webkit*/
+    background: -o-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
+    background: -ms-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
+    background: linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
 }
 #loginWrapper {
     background-image: url(/content/logo.jpg);
-    background-repeat:no-repeat;  
+    background-repeat:no-repeat;
     background-position:center;
     position: absolute;
     top: 0;
@@ -53,11 +56,12 @@ body {
 }
 .pannel {
     position: fixed;
-    top: 122px;
+    top: 200px;
     left: 0;
     color: #fff;
     background: rgba(28,28,31,.94);
     border-radius: 0 10px 10px 0;
+    z-index: 1;
 }
 #userList {
     list-style: none;
@@ -68,31 +72,17 @@ span {
 .list {
     display: inline-block;
 }
-#needUserList {
-    line-height: 50px;
-}
-#needUserList:hover {
+
+#toggleUserList:hover {
     background-color:#aaa;
 }
-#musicBox {
-    width: 100%;
-    height: 40px;
-    background: rgba(62,62,68,.94);
-    color: #fff;
-    font-size: 14px;
-}
-/* #musicBox .volume{
-    float: left;
-    width: 100px;
-    padding-left: 10px;
-    margin-top: 17px;
-} */
 
 #historyMsg {
     width: 100%;
     overflow: auto;
     text-align: center;
     font-size: 18px;
+    position: relative;
 }
 #historyMsg img {
     max-width: 50%;
@@ -104,6 +94,8 @@ span {
     width: 100%;
     color: rgb(0, 0, 0);
     background-color:rgb(205, 205, 205);
+    position: fixed;
+    bottom: 0;
 }
 
 .messageBox {

@@ -1,12 +1,13 @@
 $(function(){
     var that = this;
-    var h = $(document).height();
-    var h_controls = $(".controls").height();
-    var h_musicBox = $("#musicBox").height();
-    var div_h = h - h_controls - h_musicBox;
+    _historyMsgHeight();
+    $("#player1").resize(function () {          
+        _historyMsgHeight();
+    });
     var randomColor = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+    $(".aplayer").css("margin", "0");
     $("#colorStyle").val(randomColor); 
-    $("#historyMsg").css({"height":div_h+"px"});
+   
     //建立到服务器的socket连接
     this.socket = io.connect();
     //监听socket的connect事件，此事件表示连接已经建立
@@ -20,7 +21,7 @@ $(function(){
         $("#info").html("昵称已被占用");//显示昵称已被占有的提示
     });
     this.socket.on("loginSuccess", function() {
-        $(document).attr("title", "vchat | " + $("#nicknameInput").val());
+        $(document).attr("title", "Vchat | " + $("#nicknameInput").val());
         $("#loginWrapper").css("display", "none");//隐藏遮罩层显示聊天界面
         $("#messageInput").focus();//让消息输入框获得焦点
     });
@@ -40,11 +41,12 @@ $(function(){
         //显示用户列表
         var $userList = $("#userList");
             docFragment = document.createDocumentFragment();
+            $docFragment = $(docFragment);
             for (var i = 0; i < userCount; i++) {
                 var userLi = document.createElement('li');
                 userLi.innerHTML = '<span>' + users[i] + '</span>' + '<span>' + '在线' + '</span>';
                 userLi.title = i; 
-                docFragment.append(userLi);
+                $docFragment.append(userLi);
             }
         $userList.html(docFragment);
     });
@@ -80,16 +82,17 @@ $(function(){
     });
     //隐藏用户列表
     var flag=true;
-    $("#needUserList").click(function() {
+    $("#toggleUserList").click(function() {   
+        console.log("checked");
         $("#userUl").toggle("slow");
         if(flag){ 
             $("#tag").removeClass().addClass("glyphicon glyphicon-chevron-right");
             flag = false;
-       }else{
+        }else{
             $("#tag").removeClass().addClass("glyphicon glyphicon-chevron-left");
             flag = true;
-       }
-    })
+        }
+    });
     //发送信息
     $("#messageInput").keyup(function(e) {
         var $messageInput = $("#messageInput"),
@@ -101,13 +104,12 @@ $(function(){
             $messageInput.val("");
             that.socket.emit('postMsg', msg, color);
             _displayNewMsg(nickName, msg, color);
-        };
+        }
     });
     //发射弹幕
     $("#checkbox1").click(function() {
         if(this.checked){
-            console.log("checked");
-            $("#messageInput").unbind();
+            $("#messageInput").off();
             $("#messageInput").keyup(function(e) {
                 var $messageInput = $("#messageInput"),
                 msg = $messageInput.val(),
@@ -123,8 +125,7 @@ $(function(){
                 }
             });
         }else{
-            console.log("unchecked");
-            $("#messageInput").unbind();
+            $("#messageInput").off();
             $("#messageInput").keyup(function(e) {
                 var $messageInput = $("#messageInput"),
                 msg = $messageInput.val(),
@@ -171,7 +172,7 @@ $(function(){
     //单击表情按钮显示表情窗口
     //再单击则取消
     $("#emoji").click(function(e) {
-        var emojiwrapper = $("#emojiWrapper").css("display", "block");
+        $("#emojiWrapper").toggle();
         e.stopPropagation();//终止冒泡过程
     })
     //单击页面其他地方关闭表情窗口
@@ -192,14 +193,22 @@ $(function(){
     })
 
 });
+function _historyMsgHeight(){
+    var h = $(document).height();
+    var h_controls = $(".controls").height();
+    var h_player1 = $("#player1").height();
+    var div_h = h - h_controls - h_player1 ;
+    $("#historyMsg").css({"height":div_h+"px"});
+}
 function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
         docFragment = document.createDocumentFragment();//
+        $docFragment = $(docFragment);
     for (var i = 69; i > 0; i--) {
         var emojiItem = document.createElement('img');
         emojiItem.src = '../content/emoji/' + i + '.gif';
         emojiItem.title = i;
-        docFragment.append(emojiItem);
+        $docFragment.append(emojiItem);
     };
     emojiContainer.append(docFragment);
 }
@@ -212,6 +221,7 @@ function _displayNewMsg(user, msg, color) {
         msg = _showEmoji(msg);
     msgToDisplay.style.color = color || '#fff';
     msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+
     $container.append(msgToDisplay);
     $container.scrollTop($container.prop("scrollHeight"));
 }
@@ -259,3 +269,33 @@ function _showEmoji(msg) {
     };
     return result;
 }
+var ap1 = new APlayer({
+    element: document.getElementById('player1'),
+    narrow: false,
+    autoplay: false,
+    showlrc: false,
+    mutex: true,
+    theme: '#e6d0b2',
+    mode: 'random',
+    music: [
+        {
+            title: '她说',
+            author: '林俊杰',
+            url: 'http://music.163.com/song/media/outer/url?id=108242.mp3',
+            pic: 'http://p1.music.126.net/peLODpaxX1Hl4RWYKR-34Q==/109951163071284933.jpg?param=130y130',
+        },
+        {
+            title: '可惜没如果',
+            author: '林俊杰',
+            url: 'http://music.163.com/song/media/outer/url?id=29814898.mp3',
+            pic: 'http://p1.music.126.net/X0EDfXzxMQJiQ-71JFGdZw==/3238061746556733.jpg?param=130y130',
+        },
+        {
+            title: '背对背拥抱',
+            author: '林俊杰',
+            url: 'http://music.163.com/song/media/outer/url?id=108418.mp3',
+            pic: 'http://p1.music.126.net/oALpJH1SwQE9eLaYQHLQHw==/109951163071285497.jpg?param=130y130',
+        }
+    ]
+});
+

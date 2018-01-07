@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vchart</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
@@ -17,28 +15,12 @@
             <ul id="userList">     
             </ul> 
         </div>
-        <div class="list" id="needUserList">
+        <div class="list" id="toggleUserList">
             <span><i class="glyphicon glyphicon-chevron-left" id="tag"></i></span>
         </div>
     </div>
     <div class="wrapper">
-        <div id="musicBox">
-            <div class="playerWrapper">
-                <div class="musicProgress">
-
-                </div>
-                <div id="musicControl">
-
-                </div>
-                <!-- <div class="volume">
-                    <input type="range" step="1" id="volume" min="0" max="100" value="25" onchange="box.changeVolume(this.value)" oninput="box.changeVolume(this.value)">
-                </div> -->
-                <div id="np">
-                    <!-- <span id="np-mode">正在播放:</span>
-                    <span id="np-text" class="select-text"></span> -->
-                </div>
-            </div>
-        </div>
+        <div id="player1" class="aplayer"></div> 
         <div id="historyMsg">  
         </div> 
         <div class="controls" >
@@ -68,7 +50,7 @@
     <div id="loginWrapper">
         <div id="nickWrapper"> 
             <label id="info"></label>  
-            <input type="text" id="nicknameInput" /></br> 
+            <input type="text" id="nicknameInput" />  </br> 
             <input type="submit" value="确定" id="loginBtn" />
         </div>
     </div>
@@ -76,9 +58,13 @@
         <div id="showDanmu">
         </div>
     </div> 
+
     <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-resize/1.1/jquery.ba-resize.min.js"></script>
+    <script src="https://cdn.bootcss.com/aplayer/1.6.0/APlayer.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="scripts/jquery-Vchat.js"></script>
+   
 </body>
 </html>
