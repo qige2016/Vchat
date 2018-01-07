@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="pannel">
-        <div class="list" id="userUl">  
-            <span id="status"></span>
-            <ul id="userList">     
-            </ul> 
-        </div>
-        <div class="list" id="toggleUserList">
-            <span><i class="glyphicon glyphicon-chevron-left" id="tag"></i></span>
-        </div>
-    </div>
     <div class="wrapper">
+        <div class="pannel">
+            <div class="list" id="userUl">  
+                <span id="status"></span>
+                <ul id="userList">     
+                </ul> 
+            </div>
+            <div class="list" id="toggleUserList">
+                <span><i class="glyphicon glyphicon-chevron-left" id="tag"></i></span>
+            </div>
+        </div>
         <div id="player1" class="aplayer"></div> 
         <div id="historyMsg">  
         </div> 
@@ -46,6 +46,10 @@
         </div>  
         <div id="emojiWrapper">
         </div> 
+        <div id="danmuWrapper">
+            <div id="showDanmu">
+            </div>
+        </div>         
     </div>
     <div id="loginWrapper">
         <div id="nickWrapper"> 
@@ -54,11 +58,7 @@
             <input type="submit" value="确定" id="loginBtn" />
         </div>
     </div>
-    <div id="danmuWrapper">
-        <div id="showDanmu">
-        </div>
-    </div> 
-
+ 
     <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-resize/1.1/jquery.ba-resize.min.js"></script>

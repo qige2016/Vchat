@@ -4,7 +4,7 @@ $(function(){
     $("#player1").resize(function () {          
         _historyMsgHeight();
     });
-    var randomColor = '#'+Math.floor(Math.random()*0xffffff).toString(16);
+    var randomColor = '#' + Math.floor(Math.random()*0xffffff).toString(16);
     $(".aplayer").css("margin", "0");
     $("#colorStyle").val(randomColor); 
    
@@ -113,15 +113,19 @@ $(function(){
             $("#messageInput").keyup(function(e) {
                 var $messageInput = $("#messageInput"),
                 msg = $messageInput.val(),
+                reg = /\[emoji:\d+\]/g,
                 //获取颜色
                 color = $("#colorStyle").val(),
                 nickName = $("#nicknameInput").val();
+                match = reg.exec(msg);
                 if (e.keyCode == 13 && msg.trim().length != 0) {
                     $messageInput.val("");
                     that.socket.emit('postMsg', msg, color);
                     _displayNewMsg(nickName, msg, color);
-                    that.socket.emit('danmu', msg, color);
-                    _displaybullet(nickName, msg, color);
+                    if(!match){
+                        that.socket.emit('danmu', msg, color);
+                        _displaybullet(nickName, msg, color);
+                    }
                 }
             });
         }else{
@@ -200,6 +204,10 @@ function _historyMsgHeight(){
     var div_h = h - h_controls - h_player1 ;
     $("#historyMsg").css({"height":div_h+"px"});
 }
+function _wrapperWidth(){
+    var h = $(document).width();
+    $(".wrapper").css({"width":h+"px"});
+}
 function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
         docFragment = document.createDocumentFragment();//
@@ -228,18 +236,17 @@ function _displayNewMsg(user, msg, color) {
 function _displaybullet(user, msg, color){
     var danmu = $("<div class='bullet'>" + msg + "</div>"),
         fontSize = Math.floor((Math.random() + 1) * 24) + "px",
-        left = $("#showDanmu").width() + "px",
         top = Math.floor(Math.random() * 400) + "px";
     top = parseInt(top) > 352 ? "352px" : top;
     danmu.css({
         "position": 'absolute',
         "color": color || '#fff',
         "font-size": fontSize,
-        "left": left,
+        "right": 0,
         "top": top
     });
     $("#showDanmu").append(danmu);
-    danmu.animate({left: '-' + (danmu.offset().left - $("#showDanmu").offset().left) + "px"}, 15000,function(){  
+    danmu.animate({left: '-' + danmu.width() + "px"}, 15000,function(){  
         $(this).hide();  
     });  
 }

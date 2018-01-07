@@ -8,6 +8,9 @@ body {
     background-attachment: fixed;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
 }
+.wrapper {
+    width: 100%;
+}
 #loginWrapper {
     background-image: url(/content/logo.jpg);
     background-repeat:no-repeat;
@@ -72,7 +75,6 @@ span {
 .list {
     display: inline-block;
 }
-
 #toggleUserList:hover {
     background-color:#aaa;
 }
@@ -91,11 +93,11 @@ span {
     color: rgb(110, 110, 110);
 }
 .controls { 
+    /* position: fixed; */
     width: 100%;
     color: rgb(0, 0, 0);
     background-color:rgb(205, 205, 205);
-    position: fixed;
-    bottom: 0;
+    /* bottom: 0; */
 }
 
 .messageBox {
@@ -164,6 +166,5 @@ ul.items>li:hover{
     opacity:0.8;
 }
 #showDanmu {
-    width: 85%;
-
+    width: 90%;
 }
