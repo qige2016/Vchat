@@ -1,8 +1,9 @@
 $(function(){
     var that = this;
-    _historyMsgHeight();
+    var h = $(document).height();
+    _historyMsgHeight(h);
     $("#player1").resize(function () {          
-        _historyMsgHeight();
+        _historyMsgHeight(h);
     });
     var randomColor = '#' + Math.floor(Math.random()*0xffffff).toString(16);
     $(".aplayer").css("margin", "0");
@@ -50,6 +51,19 @@ $(function(){
             }
         $userList.html(docFragment);
     });
+    this.socket.on("newPlay", function(nickName, musicTitle, url, playIndex) {
+        var msg = nickName + " 点播了 " + musicTitle; 
+        _displayNewMsg('系统消息', msg, 'red');
+        console.log(url);
+        ap1.addMusic([{
+            'title' : musicTitle,
+            'author' : 'Vchat',
+            'url' : url,
+            'pic' : '/content/logo.jpg'
+ 
+        }]);
+        ap1.setMusic(playIndex);
+    });
     this.socket.on("newMsg", function(user, msg, color) {
         //发送信息
         _displayNewMsg(user, msg, color);
@@ -83,7 +97,6 @@ $(function(){
     //隐藏用户列表
     var flag=true;
     $("#toggleUserList").click(function() {   
-        console.log("checked");
         $("#userUl").toggle("slow");
         if(flag){ 
             $("#tag").removeClass().addClass("glyphicon glyphicon-chevron-right");
@@ -178,12 +191,13 @@ $(function(){
     $("#emoji").click(function(e) {
         $("#emojiWrapper").toggle();
         e.stopPropagation();//终止冒泡过程
-    })
+    });
     //单击页面其他地方关闭表情窗口
     $(document).click(function(e) {
         var $emojiwrapper = $("#emojiWrapper");
         if (e.target != $emojiwrapper) {
             $emojiwrapper.css("display", "none");
+           
         }
     });
     $("#emojiWrapper").click(function(e) {
@@ -193,24 +207,60 @@ $(function(){
             var $messageInput = $("#messageInput");
             $messageInput.focus();
             $messageInput.val($messageInput.val() + '[emoji:' + target.title + ']');
-        };
-    })
+        }
+    });
+    //音乐事件
+    _initialMusic();
+    $("#music").click(function(e) {
+        $("#musicWrapper").toggle();
+        $("#musicTitle").val("");
+        $("#url").val("");
+        e.stopPropagation();//终止冒泡过程
+    });
+    //添加歌曲
+    $("#appendButton").click(function(){
+        var musicTitle = $("#musicTitle").val(),
+            url = $("#url").val(),
+            nickName = $("#nicknameInput").val(),
+            playIndex = $(".aplayer-list li").length,
+            Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
+            objExp=new RegExp(Expression);
+
+        if(musicTitle != ''){
+            if(objExp.test(url) == true){
+                that.socket.emit('play', musicTitle, url, playIndex);
+            }else{
+                alert("url格式不正确")
+            }   
+        }else{
+            alert("音乐名称不能为空");
+        }
+    });
 
 });
-function _historyMsgHeight(){
-    var h = $(document).height();
+function _historyMsgHeight(h){
     var h_controls = $(".controls").height();
     var h_player1 = $("#player1").height();
     var div_h = h - h_controls - h_player1 ;
     $("#historyMsg").css({"height":div_h+"px"});
 }
-function _wrapperWidth(){
-    var h = $(document).width();
-    $(".wrapper").css({"width":h+"px"});
+function _initialMusic() {
+    var musicContain = $("#musicWrapper"),
+        docFragment = document.createDocumentFragment();
+        $docFragment = $(docFragment);
+        $musicDiv = $('<div id="musicDiv"></div>');
+        $titleSpan = $("<span>音乐名称:</span>");
+        $titleInput = $('<input type="text" id="musicTitle" maxlength="30"></br>');
+        $urlSpan = $("<span>url:</span>");
+        $urlInput = $('<input type="text" id="url" maxlength="300">');
+        $appendButton = $('<span><button id="appendButton">点播！</button></span>');
+        $musicDiv.append($titleSpan, $titleInput, $urlSpan, $urlInput, $appendButton);
+        $docFragment.append($musicDiv);
+        musicContain.append(docFragment);
 }
 function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
-        docFragment = document.createDocumentFragment();//
+        docFragment = document.createDocumentFragment();
         $docFragment = $(docFragment);
     for (var i = 69; i > 0; i--) {
         var emojiItem = document.createElement('img');

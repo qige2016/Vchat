@@ -168,3 +168,17 @@ ul.items>li:hover{
 #showDanmu {
     width: 90%;
 }
+#musicWrapper {
+    display: none;
+    position: absolute;
+    width: 100%;
+    bottom: 95px;
+    background-color: #aaa;
+    color: #000;
+    border-radius: 3px;
+}
+#musicDiv {
+    float: right;
+    width: 50%;
+    margin: 0 auto;
+}

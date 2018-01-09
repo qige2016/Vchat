@@ -30,6 +30,10 @@ io.sockets.on('connection', function(socket) {
             socket.broadcast.emit('system', socket.nickname, users, users.length, 'logout');
         }
     });
+    //接收点播则发送所有人
+    socket.on('play', function(musicTitle, url, playIndex) {
+        io.sockets.emit('newPlay', socket.nickname, musicTitle, url, playIndex);
+    });
     //接收新信息则广播其他人
     socket.on('postMsg', function(msg, color) {
         socket.broadcast.emit('newMsg', socket.nickname, msg, color);
@@ -43,6 +47,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('danmu', function(msg, color) {
         socket.broadcast.emit('newDanmu', socket.nickname, msg, color);
     });
+
 });
 
 
