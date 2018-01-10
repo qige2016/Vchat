@@ -342,16 +342,22 @@ var ap1 = new APlayer({
             pic: 'http://p1.music.126.net/peLODpaxX1Hl4RWYKR-34Q==/109951163071284933.jpg?param=130y130',
         },
         {
-            title: '可惜没如果',
-            author: '林俊杰',
-            url: 'http://music.163.com/song/media/outer/url?id=29814898.mp3',
-            pic: 'http://p1.music.126.net/X0EDfXzxMQJiQ-71JFGdZw==/3238061746556733.jpg?param=130y130',
-        },
-        {
             title: '背对背拥抱',
             author: '林俊杰',
             url: 'http://music.163.com/song/media/outer/url?id=108418.mp3',
             pic: 'http://p1.music.126.net/oALpJH1SwQE9eLaYQHLQHw==/109951163071285497.jpg?param=130y130',
+        },
+        {
+            title: '修炼爱情',
+            author: '林俊杰',
+            url: 'http://music.163.com/song/media/outer/url?id=25727803.mp3',
+            pic: 'http://p1.music.126.net/6miaRW-_QT81R-gsj4MCLg==/4431031859953290.jpg?param=130y130',
+        },
+        {
+            title: '爱笑的眼睛',
+            author: '林俊杰',
+            url: 'http://music.163.com/song/media/outer/url?id=108245.mp3',
+            pic: 'http://p1.music.126.net/peLODpaxX1Hl4RWYKR-34Q==/109951163071284933.jpg?param=130y130',
         }
     ]
 });

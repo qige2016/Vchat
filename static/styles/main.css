@@ -93,18 +93,13 @@ span {
     color: rgb(110, 110, 110);
 }
 .controls { 
-    /* position: fixed; */
     width: 100%;
     color: rgb(0, 0, 0);
     background-color:rgb(205, 205, 205);
-    /* bottom: 0; */
 }
 
-.messageBox {
-    width: 60%;
-    margin: 0 auto;
-}
-.items {
+ul.items {
+    display: block;
     float: right;
     list-style: none;
     line-height: 20px;
@@ -130,7 +125,10 @@ ul.items>li:hover{
     filter:Alpha(Opacity=0);
     font-size: 200px;
 }
-
+#inputwrap {
+    width: 60%;
+    margin: 0 auto;
+}
 #messageInput {
     width: 100%;
     color: #000;
