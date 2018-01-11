@@ -5,9 +5,8 @@ var express = require('express'),
     port = process.env.PORT || 3000;
     server = app.listen(port),
     io = require('socket.io').listen(server),
-
-app.use('/', express.static(__dirname + '/static'));
-var NeteaseMusic = require('simple-netease-cloud-music');
+    NeteaseMusic = require('simple-netease-cloud-music');
+app.use('/', express.static(__dirname + '/static')); 
 
 //socket部分
 io.sockets.on('connection', function(socket) {
