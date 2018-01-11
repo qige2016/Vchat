@@ -1,7 +1,7 @@
 {
     "name": "vchat",
     "description": "a realtime chat web application",
-    "version": "0.4.0",
+    "version": "1.0.0",
     "main": "server.js",
     "dependencies": {
         "express": "3.4.x",
