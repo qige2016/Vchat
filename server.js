@@ -31,8 +31,8 @@ io.sockets.on('connection', function(socket) {
         }
     });
     //接收点播则发送所有人
-    socket.on('play', function(musicName, arName, url, src, playIndex) {
-        io.sockets.emit('newPlay', socket.nickname, musicName, arName, url, src, playIndex);
+    socket.on('play', function(musicName, arName, url, src) {
+        io.sockets.emit('newPlay', socket.nickname, musicName, arName, url, src);
     });
     //接收新信息则广播其他人
     socket.on('postMsg', function(msg, color) {

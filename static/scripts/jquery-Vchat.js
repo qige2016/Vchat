@@ -51,8 +51,9 @@ $(function(){
             }
         $userList.html(docFragment);
     });
-    this.socket.on("newPlay", function(nickName, musicName, arName, url, src, playIndex) {
+    this.socket.on("newPlay", function(nickName, musicName, arName, url, src) {
         var msg = nickName + " 点播了 " + musicName; 
+        var playIndex = $(".aplayer-list li").length;
         _displayNewMsg('系统消息', msg, 'red');
         ap1.addMusic([{
             'title' : musicName,
@@ -224,34 +225,11 @@ $(function(){
         }
     });
     //音乐事件
-    // _initialMusic();
     _initialPlaylist();
     $("#music").click(function(e) {
-        // $("#musicWrapper").toggle();
-        // $("#name").val("");
-        // $("#url").val("");
         $("#playlistWrapper").toggle();
         e.stopPropagation();//终止冒泡过程
     });
-    //添加歌曲
-    // $("#appendButton").click(function(){
-    //     var name = $("#name").val(),
-    //         url = $("#url").val(),
-    //         nickName = $("#nicknameInput").val(),
-    //         playIndex = $(".aplayer-list li").length,
-    //         Expression=/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/,
-    //         objExp=new RegExp(Expression);
-
-    //     if(name != ''){
-    //         if(objExp.test(url) == true){
-    //             that.socket.emit('play', name, url, playIndex);
-    //         }else{
-    //             alert("url格式不正确")
-    //         }   
-    //     }else{
-    //         alert("音乐名称不能为空");
-    //     }
-    // });
     //添加歌单
     $("#searchButton").click(function(){
         var keywords = $searchInput.val();
@@ -264,10 +242,9 @@ $(function(){
             arName = $(">span", this).eq(1).html(),
             id = $(this).attr("title"),
             url = "http://music.163.com/song/media/outer/url?id="+ id +".mp3",
-            src = $(">img", this).attr("src"),
-            playIndex = $(".aplayer-list li").length;
+            src = $(">img", this).attr("src");
         console.log(musicName, arName, url, src);
-        that.socket.emit('play', musicName, arName, url, src, playIndex);
+        that.socket.emit('play', musicName, arName, url, src);
     });
 });
 function _historyMsgHeight(h){
@@ -276,20 +253,6 @@ function _historyMsgHeight(h){
     var div_h = h - h_controls - h_player1 ;
     $("#historyMsg").css({"height":div_h+"px"});
 }
-// function _initialMusic() {
-//     var musicContain = $("#musicWrapper");
-//         docFragment = document.createDocumentFragment();
-//         $docFragment = $(docFragment);
-//         $musicDiv = $('<div id="musicDiv"></div>');
-//         $titleSpan = $("<span>音乐名称:</span>");
-//         $titleInput = $('<input type="text" id="name" maxlength="30"></br>');
-//         $urlSpan = $("<span>url:</span>");
-//         $urlInput = $('<input type="text" id="url" maxlength="300">');
-//         $appendButton = $('<span><button id="appendButton">点播！</button></span>');
-//         $musicDiv.append($titleSpan, $titleInput, $urlSpan, $urlInput, $appendButton);
-//         $docFragment.append($musicDiv);
-//         musicContain.append(docFragment);
-// }
 function _initialPlaylist() {
     var playlist = $("#playlistWrapper");
         docFragment = document.createDocumentFragment();
@@ -380,6 +343,7 @@ var ap1 = new APlayer({
     showlrc: false,
     mutex: true,
     theme: '#e6d0b2',
+    preload: 'metadata',
     mode: 'random',
     music: [
         {
@@ -393,18 +357,6 @@ var ap1 = new APlayer({
             author: '林俊杰',
             url: 'http://music.163.com/song/media/outer/url?id=108418.mp3',
             pic: 'http://p1.music.126.net/oALpJH1SwQE9eLaYQHLQHw==/109951163071285497.jpg?param=50y50',
-        },
-        {
-            title: '修炼爱情',
-            author: '林俊杰',
-            url: 'http://music.163.com/song/media/outer/url?id=25727803.mp3',
-            pic: 'http://p1.music.126.net/6miaRW-_QT81R-gsj4MCLg==/4431031859953290.jpg?param=50y50',
-        },
-        {
-            title: '爱笑的眼睛',
-            author: '林俊杰',
-            url: 'http://music.163.com/song/media/outer/url?id=108245.mp3',
-            pic: 'http://p1.music.126.net/peLODpaxX1Hl4RWYKR-34Q==/109951163071284933.jpg?param=130y130',
         }
     ]
 });
