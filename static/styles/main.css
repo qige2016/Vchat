@@ -107,7 +107,7 @@ ul.items {
 }
 ul.items>li{
     float: left;
-    padding: 8px 10px;
+    padding: 8px 5px;
 }
 ul.items>li:hover{
     background-color: rgba(0, 0, 255, 0.295);
@@ -166,7 +166,16 @@ ul.items>li:hover{
 #showDanmu {
     width: 90%;
 }
-#musicWrapper {
+/* #musicWrapper {
+    display: none;
+    position: absolute;
+    width: 100%;
+    bottom: 95px;
+    background-color: #aaa;
+    color: #000;
+    border-radius: 3px;
+} */
+#playlistWrapper {
     display: none;
     position: absolute;
     width: 100%;
@@ -175,8 +184,20 @@ ul.items>li:hover{
     color: #000;
     border-radius: 3px;
 }
-#musicDiv {
-    float: right;
-    width: 50%;
+#playlistDiv {
+    width: 80%;
     margin: 0 auto;
+}
+
+/* #musicDiv {
+    float: right;
+    width: 80%;
+    margin: 0 auto;
+} */
+#playlistUl {
+    list-style: none;
+}
+#playlistUl>li:hover {
+    background-color: rgba(0, 0, 255, 0.295);
+    cursor:pointer;
 }
