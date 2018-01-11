@@ -5,7 +5,7 @@ var express = require('express'),
     port = process.env.PORT || 3000;
     server = app.listen(port),
     io = require('socket.io').listen(server),
-    // NeteaseMusic = require('simple-netease-cloud-music');
+    NeteaseMusic = require('simple-netease-cloud-music');
 app.use('/', express.static(__dirname + '/static')); 
 
 //socket部分
@@ -48,13 +48,13 @@ io.sockets.on('connection', function(socket) {
         socket.broadcast.emit('newDanmu', socket.nickname, msg, color);
     });
     //接收搜索则后台开始搜索
-    // socket.on('search', function(keywords) {
-    //     var nm = new NeteaseMusic();
-    //     nm.search(keywords).then(data => {
-    //         // io.sockets.emit('search', data);
-    //         socket.to(socket.nickname).emit('search', data);//给指定的客户端发送消息
-    //     }); 
-    // });
+    socket.on('search', function(keywords) {
+        var nm = new NeteaseMusic();
+        nm.search(keywords).then(data => {
+            // io.sockets.emit('search', data);
+            socket.to(socket.nickname).emit('search', data);//给指定的客户端发送消息
+        }); 
+    });
 });
 
 
