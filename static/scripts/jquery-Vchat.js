@@ -272,7 +272,7 @@ function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
         docFragment = document.createDocumentFragment();
         $docFragment = $(docFragment);
-    for (var i = 32; i > 0; i--) {
+    for (var i = 24; i > 0; i--) {
         var emojiItem = document.createElement('img');
         emojiItem.src = '../content/emoji/' + i + '.gif';
         emojiItem.title = i;
