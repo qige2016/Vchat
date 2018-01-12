@@ -75,7 +75,6 @@ $(function(){
             playlistLi.innerHTML = '<img src="' + src + '">' + '<span id="musicName">' + musicName + '</span>' + '<span id="arName">' + arName + '</span>';
             playlistLi.title = data.result.songs[i].id;
             $docFragment.append(playlistLi);
-            // console.log(data.result.songs[i]);
         }
         $playlistUl.html(docFragment);
     });
@@ -237,13 +236,11 @@ $(function(){
     });
     //点播搜索列表的歌曲
     $("#playlistUl").on('click','li',function(){
-        console.log("clicked");
         var musicName = $(">span", this).eq(0).html(),
             arName = $(">span", this).eq(1).html(),
             id = $(this).attr("title"),
             url = "http://music.163.com/song/media/outer/url?id="+ id +".mp3",
             src = $(">img", this).attr("src");
-        console.log(musicName, arName, url, src);
         that.socket.emit('play', musicName, arName, url, src);
     });
 });
@@ -272,7 +269,7 @@ function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
         docFragment = document.createDocumentFragment();
         $docFragment = $(docFragment);
-    for (var i = 24; i > 0; i--) {
+    for (var i = 18; i > 0; i--) {
         var emojiItem = document.createElement('img');
         emojiItem.src = '../content/emoji/' + i + '.gif';
         emojiItem.title = i;
