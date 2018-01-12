@@ -243,6 +243,14 @@ $(function(){
             src = $(">img", this).attr("src");
         that.socket.emit('play', musicName, arName, url, src);
     });
+    var oHeight = $(document).height(); //浏览器当前的高度
+        $(window).resize(function(){
+            if($(document).height() < oHeight){
+                $("#playlistWrapper").css("bottom","0");
+            }else{
+                $("#playlistWrapper").css("bottom","95px");
+        }      
+});
 });
 function _historyMsgHeight(h){
     var h_controls = $(".controls").height();
