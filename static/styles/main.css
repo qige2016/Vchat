@@ -1,6 +1,6 @@
 body {
-    background:-moz-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));/*Mozilla*/
-    background:-webkit-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));/*new gradient for Webkit*/
+    background:-moz-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
+    background:-webkit-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
     background: -o-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
     background: -ms-linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
     background: linear-gradient(top,rgb(0, 0, 0),rgb(50, 50, 50));
@@ -166,21 +166,13 @@ ul.items>li:hover{
 #showDanmu {
     width: 90%;
 }
-/* #musicWrapper {
-    display: none;
-    position: absolute;
-    width: 100%;
-    bottom: 95px;
-    background-color: #aaa;
-    color: #000;
-    border-radius: 3px;
-} */
+
 #playlistWrapper {
     display: none;
     position: absolute;
     width: 100%;
     bottom: 95px;
-    background-color: #aaa;
+    background-color:  #ccc;
     color: #000;
     border-radius: 3px;
 }
@@ -189,13 +181,39 @@ ul.items>li:hover{
     margin: 0 auto;
 }
 
-/* #musicDiv {
-    float: right;
-    width: 80%;
-    margin: 0 auto;
-} */
+#musicTitle {
+    text-align: center;
+    background-color: #aaa;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #555;
+    margin-right: 0;
+}
+#search {
+    display: inline-block;
+    width: 120px;
+    border: 1px solid #555;
+}
+#searchButton {
+    -webkit-appearance: button;
+    cursor: pointer;
+    border-width: 1px;
+    padding: 5px 10px;
+    height: 30px;
+    background-color: #ccc;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid #555;
+}
 #playlistUl {
     list-style: none;
+}
+#playlistUl>li {
+    background-color: #fff;
+    border: 1px solid #555;
 }
 #playlistUl>li:hover {
     background-color: rgba(0, 0, 255, 0.295);

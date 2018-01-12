@@ -260,9 +260,9 @@ function _initialPlaylist() {
         $playlistDiv =$('<div id="playlistDiv"></div>');
         $searchDiv = $('<div id="searchDiv"></div>');
         $playlistUl = $('<ul id="playlistUl"></ul>');
-        $searchSpan = $("<span>音乐名称:</span>");
+        $searchSpan = $("<span id='musicTitle'>音乐名称:</span>");
         $searchInput = $('<input type="text" id="search" maxlength="30">');
-        $searchButton = $('<span><button id="searchButton">搜索</button></span>');
+        $searchButton = $('<button id="searchButton">搜 索!</button>');
         $searchDiv.append($searchSpan, $searchInput, $searchButton);
         $playlistDiv.append($searchDiv, $playlistUl);
         $docFragment.append($playlistDiv);
@@ -272,7 +272,7 @@ function _initialEmoji() {
     var emojiContainer = $("#emojiWrapper"),
         docFragment = document.createDocumentFragment();
         $docFragment = $(docFragment);
-    for (var i = 69; i > 0; i--) {
+    for (var i = 32; i > 0; i--) {
         var emojiItem = document.createElement('img');
         emojiItem.src = '../content/emoji/' + i + '.gif';
         emojiItem.title = i;
