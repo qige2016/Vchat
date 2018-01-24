@@ -1,7 +1,6 @@
 $(function(){
     var that = this;
     var h = $(document).height();
-    _historyMsgHeight(h);
     $("#player1").resize(function () {          
         _historyMsgHeight(h);
     });
@@ -36,7 +35,6 @@ $(function(){
     this.socket.on("system", function(nickName, users, userCount, type) {
         //判断用户是否连接还是离开以显示不同的信息
         var msg = nickName + (type == 'login' ? ' 在线' : ' 离线');
-
         _displayNewMsg('系统消息', msg, 'red');
         $("#status").html(userCount + '名用户在线');
         //显示用户列表
@@ -74,7 +72,7 @@ $(function(){
                 src = data.result.songs[i].al.picUrl + '?param=50y50';
             playlistLi.innerHTML = '<img src="' + src + '">' + '<span id="musicName">' + musicName + '</span>' + '<span id="arName">' + arName + '</span>';
             playlistLi.title = data.result.songs[i].id;
-            $docFragment.append(playlistLi);
+            $docFragment.append(playlistLi); 
         }
         $playlistUl.html(docFragment);
     });
@@ -227,7 +225,13 @@ $(function(){
     _initialPlaylist();
     $("#music").click(function(e) {
         $("#playlistWrapper").toggle();
+        $("#messageInput").toggle();
         e.stopPropagation();//终止冒泡过程
+    });
+    $(".controls").resize(function () {  
+        _historyMsgHeight(h);  
+        var $container = $("#historyMsg");      
+        $container.scrollTop($container.prop("scrollHeight"));
     });
     //添加歌单
     $("#searchButton").click(function(){
@@ -243,14 +247,6 @@ $(function(){
             src = $(">img", this).attr("src");
         that.socket.emit('play', musicName, arName, url, src);
     });
-    var oHeight = $(document).height(); //浏览器当前的高度
-        $(window).resize(function(){
-            if($(document).height() < oHeight){
-                $("#playlistWrapper").css("bottom","0");
-            }else{
-                $("#playlistWrapper").css("bottom","95px");
-        }      
-});
 });
 function _historyMsgHeight(h){
     var h_controls = $(".controls").height();
@@ -265,10 +261,9 @@ function _initialPlaylist() {
         $playlistDiv =$('<div id="playlistDiv"></div>');
         $searchDiv = $('<div id="searchDiv"></div>');
         $playlistUl = $('<ul id="playlistUl"></ul>');
-        $searchSpan = $("<span id='musicTitle'>音乐名称:</span>");
         $searchInput = $('<input type="text" id="search" maxlength="30">');
         $searchButton = $('<button id="searchButton">搜 索!</button>');
-        $searchDiv.append($searchSpan, $searchInput, $searchButton);
+        $searchDiv.append($searchInput, $searchButton);
         $playlistDiv.append($searchDiv, $playlistUl);
         $docFragment.append($playlistDiv);
         playlist.append(docFragment);
@@ -294,7 +289,6 @@ function _displayNewMsg(user, msg, color) {
         msg = _showEmoji(msg);
     msgToDisplay.style.color = color || '#fff';
     msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
-
     $container.append(msgToDisplay);
     $container.scrollTop($container.prop("scrollHeight"));
 }
